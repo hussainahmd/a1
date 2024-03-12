@@ -9,7 +9,7 @@ export default function Chats() {
     const fetchDataFromStorage = async () => {
         try {
             const storedData = await AsyncStorage.getItem('myData')
-            //AsyncStorage.removeItem('my-key')
+            //AsyncStorage.removeItem('myData2')
             const x = await AsyncStorage.getAllKeys()
             console.log(x)
             console.log();
@@ -17,6 +17,7 @@ export default function Chats() {
                 const parsedData = JSON.parse(storedData)
                 setData(parsedData)
                 console.log('storage')
+                console.log(parsedData[0]);
             }
         } catch (error) {
             console.error('Error fetching data from AsyncStorage:', error)
