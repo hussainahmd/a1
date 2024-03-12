@@ -1,16 +1,15 @@
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import DATA from '../data/chatdata'
 
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
 export default function Chats() {
-    const [data, setData] = useState(DATA)
+    const [data, setData] = useState(null)
 
     const fetchDataFromStorage = async () => {
         try {
             const storedData = await AsyncStorage.getItem('myData')
-            AsyncStorage.removeItem('my-key')
+            //AsyncStorage.removeItem('my-key')
             const x = await AsyncStorage.getAllKeys()
             console.log(x)
             console.log();
