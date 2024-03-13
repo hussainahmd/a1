@@ -17,5 +17,16 @@ export default function CustomHooks() {
             })
     }
 
-    return {data, myGetApiHook}
+    return { data, myGetApiHook }
 }
+
+// export default function useContacts() {
+//     const [contacts, setContacts] = useState([])
+
+//     useEffect(() => {
+//         (async () => {})()
+//     }, [])
+
+    
+//     return contacts
+// }
