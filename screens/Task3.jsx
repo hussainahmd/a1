@@ -73,7 +73,7 @@ export default function Task3({ navigation }) {
 
     useEffect(() => {
         getAllKeys()
-        loadData('myData')
+        loadData('myData2')
     }, [])
 
     return (
@@ -103,35 +103,9 @@ export default function Task3({ navigation }) {
                 </View>
                 <Button
                     title="Delete data from storage"
-                    onPress={() => deleteDatafromStorage('myData3')}
+                    onPress={() => deleteDatafromStorage('myData2')}
                 />
             </View>
         </View>
     )
 }
-
-// export default function Task3({ navigation }) {
-
-//     const {data, myGetApiHook} = CustomHooks()
-
-//     useEffect(() => {
-//         myGetApiHook(url2)
-//     }, [])
-
-//     return (
-//         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//             {data ? (
-//                 <View>
-//                     <Text>Data from API:</Text>
-//                     <Text>{JSON.stringify(data)}</Text>
-//                 </View>
-//             ) : (
-//                 <Text>No data available</Text>
-//             )}
-//             <Button
-//                 title="Check"
-//                 onPress={() => navigation.navigate('Task')}
-//             />
-//         </View>
-//     )
-// }
