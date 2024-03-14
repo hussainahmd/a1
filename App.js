@@ -13,7 +13,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Task2"
+        initialRouteName="Task"
         screenOptions={{ headerShown: true }}
       >
         <Stack.Screen name="Task3" component={Task3} />

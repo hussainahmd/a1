@@ -41,12 +41,12 @@ export default function TaskUI() {
                 </View>
                 <Button
                     title="Delete data from storage"
-                    onPress={() => deleteDatafromStorage('myData2')}
+                    onPress={() => deleteDatafromStorage('myData')}
                 />
 
                 <Button
                     title="Load"
-                    onPress={() => loadData('myData1')}
+                    onPress={() => loadData('myData')}
                 />
             </View>
         </View>
