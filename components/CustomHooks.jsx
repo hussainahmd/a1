@@ -3,10 +3,14 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const url = 'https://animechan.xyz/api/quotes'
+let isStored = false
+let storedKey = ''
 
 export default function CustomHooks() {
 
     const [data, setData] = useState(null)
+    const [allDataKeys, setAllDataKeys] = useState()
+
 
     const fetchDataFromApi = async () => {
         try {
@@ -19,9 +23,9 @@ export default function CustomHooks() {
         }
     }
 
-    const fetchDataFromStorage = async () => {
+    const fetchDataFromStorage = async (key) => {
         try {
-            const data = await AsyncStorage.getItem('myData')
+            const data = await AsyncStorage.getItem(key)
             return JSON.parse(data)
         }
         catch (error) {
@@ -29,38 +33,55 @@ export default function CustomHooks() {
         }
     }
 
-    const storeDataInStorage = async (apiData) => {
+    const storeDataInStorage = async (key, apiData) => {
         try {
-            await AsyncStorage.setItem('myData', JSON.stringify(apiData))
+            await AsyncStorage.setItem(key, JSON.stringify(apiData))
         }
         catch (error) {
             console.error('Error storing data in AsyncStorage:', error)
         }
     }
 
-    const loadData = async () => {
+    const loadData = async (key) => {
 
-        const storedData = await fetchDataFromStorage()
+        storedKey = key
+        const storedData = await fetchDataFromStorage(key)
         if (storedData) {
+            isStored = true
             setData(storedData)
         }
         else {
+            isStored = false
             const fetchedData = await fetchDataFromApi()
             setData(fetchedData)
-            storeDataInStorage(fetchedData)
+            storeDataInStorage(key, fetchedData)
+            getAllDataKeys()
         }
     }
 
-    return { data, loadData }
-}
+    const getAllDataKeys = async () => {
+        let x = await AsyncStorage.getAllKeys()
+        setAllDataKeys(x)
+    }
 
-// export default function useContacts() {
-//     const [contacts, setContacts] = useState([])
+    const deleteDatafromStorage = async (key) => {
+
+        let x = await AsyncStorage.getAllKeys()
+
+        if (x.includes(key)) {
+            await AsyncStorage.removeItem(key)
+            if (storedKey === key)
+                setData(null)
+        }
+        else {
+            console.log('key doesnt exist')
+        }
+        getAllDataKeys()
+    }
+
+    return { data, allDataKeys, isStored, storedKey, loadData, deleteDatafromStorage, getAllDataKeys }
+}
 
 //     useEffect(() => {
 //         (async () => {})()
 //     }, [])
-
-    
-//     return contacts
-// }
