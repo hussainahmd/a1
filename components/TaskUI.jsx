@@ -3,7 +3,6 @@ import React, { useEffect } from 'react'
 
 import CustomHooks from './CustomHooks'
 
-
 export default function TaskUI() {
 
     const { data, allDataKeys, isStored, storedKey, getAllDataKeys, loadData, deleteDatafromStorage } = CustomHooks()
